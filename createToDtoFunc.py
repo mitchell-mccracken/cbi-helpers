@@ -7,7 +7,7 @@ def create_to_dto_func(input_text, tableVal):
         # print(line)
         valName = line.split(":")[0]
 
-        newLine = f'row[{tableVal}.{valName}],'
+        newLine = f'{valName} = row[{tableVal}.{valName}],'
         output.append(newLine)
     return output
 
