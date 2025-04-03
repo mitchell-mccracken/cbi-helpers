@@ -3,7 +3,7 @@ def parse_kotlin_vals(input_text):
     type_mapping = {
         "integer": "Int",
         "varchar": "String",
-        "char": "String",
+        "char": "Char",
         "datetime": "LocalDateTime",
         "text": "String",
         "reference": "Int",  # Foreign key reference is typically Int
@@ -37,24 +37,17 @@ def parse_kotlin_vals(input_text):
 
 # Input: Paste your Kotlin values as plain text
 kotlin_input = """
-    val instanceId = integer("INSTANCE_ID").autoIncrement("AP_CLASS_INSTANCES_SEQ")
-    override val id = instanceId.entityId()
-    override val primaryKey = PrimaryKey(id, name = "AP_CLASS_INSTANCES_PK")
-    val createdOn = datetime("CREATED_ON").nullable()
-    val createdBy = varchar("CREATED_BY", 500).nullable()
-    val updatedOn = datetime("UPDATED_ON").nullable()
-    val updatedBy = varchar("UPDATED_BY", 500).nullable()
-    val cancelByOverride = datetime("CANCEL_BY_OVERRIDE").nullable()
-    val formatId = reference("FORMAT_ID", ApClassFormats).nullable()
-    val signupsStartOverride = datetime("SIGNUPS_START_OVERRIDE").nullable()
-    val cancelledDatetime = datetime("CANCELLED_DATETIME").nullable()
-    val price = integer("PRICE").nullable()
-    val signupMax = integer("SIGNUP_MAX").nullable()
-    val signupMin = integer("SIGNUP_MIN").nullable()
-    val doNotAutoCancel = char("DO_NOT_AUTO_CANCEL").nullable()
-    val hideOnline = char("HIDE_ONLINE").nullable()
-    val locationString = varchar("LOCATION_STRING", 100).nullable()
-    val instructorId = reference("INSTRUCTOR_ID", Persons).nullable()
+val className = varchar("CLASS_NAME", 200)
+    val instanceId = reference("INSTANCE_ID", JpClassInstances)
+    val nextStaggerId = reference("NEXT_STAGGER_ID", JpClassStaggers).nullable()
+    val spotsLeftActual = integer("SPOTS_LEFT_ACTUAL")
+    val spotsLeft = integer("SPOTS_LEFT")
+    val waitlistCount = integer("WAITLIST_COUNT").nullable()
+    val signupCount = integer("SIGNUP_COUNT")
+    val signupMax = integer("SIGNUP_MAX")
+    val noLimit = char("NO_LIMIT")
+    val nextSpotsOpeningDatetime = datetime("NEXT_SPOTS_OPENING_DATETIME").nullable()
+    val nextStaggerOccupancy = integer("NEXT_STAGGER_OCCUPANCY").nullable()
 """
 
 # Generate output
