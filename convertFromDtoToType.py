@@ -32,6 +32,8 @@ def convert_kotlin_dto_to_typescript(kotlin_dto: str) -> str:
         # if isNullable:
         #   ret += "?"
         
+
+        # TODO: strip out content if value has default values (ie = null)
         _value = None
         try:
            _value = kotlin_to_ts_types[value]
@@ -52,59 +54,14 @@ def convert_kotlin_dto_to_typescript(kotlin_dto: str) -> str:
 
 # Example usage
 kotlin_dto = """
-    //Instance Fields
-    val instanceId : Int,
-    val limitOverride : Int?,
-    val nameOverride : String?,
-    val instanceMaxAge : Int?,
-    val createdOn : LocalDateTime?,
-    val createdBy : String?,
-    val updatedOn : LocalDateTime?,
-    val updatedBy : String?,
-    val instanceMinAge : Int?,
-    val price : Int?,
-    val regCodeRowId : Int?,
-    val confirmTemplate : String?,
-    val adminHold : Char?,
-    val instructorId : Int?,
-    val locationId : Int?,
-    val reservedForGroup : Char?,
-    val overrideNoLimit : Char?,
-    //Type Fields
-    val typeId: Int,
-    val typeName: String?,
-    val signupMax: Int?,
-    val allowMultiple: Char?,
-    val ratingPrereq: Int?,
-    val sessionLength: Int?,
-    val sessionCt: Int?,
-    val ratingOverkill: Int?,
-    val typeMinAge: Int?,
-    val typeMaxAge: Int?,
-    val minSessionsForAttended: Int?,
-    val active: Char?,
-    val displayOrder: Int?,
-    val noLimit: Char?,
-
-    // Person Fields
-    val instructorNameFirst: String?,
-    val instructorNameMiddleInitial: String?,
-    val instructorNameLast: String?,
-
-    // Rating Fields
-    val ratingName: String?,
-
-    //Session Fields
-    val sessionsList : List<JpClassSessionDTO>,
-    // Staggers
-    val staggersList: List<JpClassStaggerExtendedDTO>,
-
-    // counts
-    var enrolledCount: Int? = null,
-    var waitlistCount: Int? = null,
-
-    // availability
-    val classAvailability: JpClassAvailabilityViewDTO
+val ratingId: Int,
+    val skillId: Int?,
+    val ratingName: String,
+    val ratingSeq: Int,
+    val createdOn: LocalDateTime?,
+    val createdBy: String?,
+    val updatedOn: LocalDateTime?,
+    val updatedBy: String?,
 """
 
 # print(convert_kotlin_dto_to_typescript(kotlin_dto))
